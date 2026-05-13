@@ -15,7 +15,7 @@
 
 - Know about my experiences [linkedin.com/in/tabinda-sandhu-51a724259](linkedin.com/in/tabinda-sandhu-51a724259)
 
-- ⚡ Fun fact **I like challenging projects**
+- Fun fact **I like challenging projects**
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
