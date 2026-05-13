@@ -26,8 +26,6 @@
 
 ## Featured Projects
 
-This section highlights my public repositories. More projects will be added here over time.
-
 ### 1. Data Compression Project
 
 A data compression project focused on implementing and comparing multiple compression techniques and algorithms.
@@ -43,29 +41,6 @@ https://github.com/tabindasandhu/data-compression-project
 
 #### Technologies Used
 `C` `Algorithms` `Compression Techniques` `Makefile`
-
----
-
-## Upcoming Projects
-
-Future projects will be added using the same format below:
-
-```md
-### Project Name
-
-Brief description of the project.
-
-Repository:
-https://github.com/username/repository-name
-
-#### Main Features
-- Feature 1
-- Feature 2
-- Feature 3
-
-#### Technologies Used
-`Tech 1` `Tech 2` `Tech 3`
-```
 
 ---
 
@@ -119,7 +94,7 @@ https://github.com/username/repository-name
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/>
 </a>
 
-<a href="https://www.python.org" target="_blank" rel="noreferrer">
+<a href="https://www.python.org/" target="_blank" rel="noreferrer">
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/>
 </a>
 
@@ -139,11 +114,11 @@ https://github.com/username/repository-name
 <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="scikit_learn" width="40" height="40"/>
 </a>
 
-<a href="https://www.tensorflow.org" target="_blank" rel="noreferrer">
+<a href="https://www.tensorflow.org/" target="_blank" rel="noreferrer">
 <img src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg" alt="tensorflow" width="40" height="40"/>
 </a>
 
-<a href="https://www.postgresql.org" target="_blank" rel="noreferrer">
+<a href="https://www.postgresql.org/" target="_blank" rel="noreferrer">
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/>
 </a>
 
