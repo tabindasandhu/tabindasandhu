@@ -1,19 +1,19 @@
-<h1 align="center">Hi 👋, I'm Tabinda Sandhu</h1>
+<h1 align="center">Hi, I'm Tabinda Sandhu</h1>
 <h3 align="center">A passionate frontend developer from Pakistan</h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=tabindasandhu&label=Profile%20views&color=0e75b6&style=flat" alt="tabindasandhu" /> </p>
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=tabindasandhu" alt="tabindasandhu" /></a> </p>
 
-- 🔭 I’m currently working on **Data Compression Project**
+- I’m currently working on **Data Compression Project**
 
-- 👯 I’m looking to collaborate on **AI based Automation Workflow**
+- I’m looking to collaborate on **AI based Automation Workflow**
 
-- 💬 Ask me about **React, Figma, Power Automate**
+- Ask me about **React, Figma, Power Automate**
 
-- 📫 How to reach me **tabindasandhu4@gmail.com**
+- How to reach me **tabindasandhu4@gmail.com**
 
-- 📄 Know about my experiences [linkedin.com/in/tabinda-sandhu-51a724259](linkedin.com/in/tabinda-sandhu-51a724259)
+- Know about my experiences [linkedin.com/in/tabinda-sandhu-51a724259](linkedin.com/in/tabinda-sandhu-51a724259)
 
 - ⚡ Fun fact **I like challenging projects**
 
