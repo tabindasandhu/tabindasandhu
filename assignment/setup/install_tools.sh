@@ -66,6 +66,8 @@ PACKAGES=(
     rsync                    # smart_backup.sh file copying
     tar
     gzip
+    zip                      # packaging the submission archive
+    unzip
     shellcheck               # lint every .sh before submitting
 
     # --- docs & convenience ---
