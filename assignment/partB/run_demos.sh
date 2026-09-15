@@ -284,8 +284,14 @@ banner "Question 10 - wsl_lite dispatcher"
 note "output/q10_wsl_lite.txt"
 
 # ---------------------------------------------------------------------------
-# Restore permissions so a later `make clean` / rm can remove the workspace.
-chmod -R u+rwX "$WORK" 2>/dev/null
+# Make sure the workspace can be removed later by `make clean`.
+#
+# Only DIRECTORIES need their permissions restored: unlinking a file depends on
+# the containing directory's write bit, not on the file's own mode. Restoring
+# files too would clear the 0600->000 on noperm.txt and silently break the
+# "no read permission" edge case for anyone re-running the commands by hand
+# afterwards, since the owner would then be able to read it again.
+find "$WORK" -type d -exec chmod u+rwx {} + 2>/dev/null
 
 banner "Done"
 printf 'All demonstration output is in %s/\n\n' "$OUT"
