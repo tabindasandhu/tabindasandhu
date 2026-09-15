@@ -1,17 +1,17 @@
 
 ########## unmodified /bin/cat, with the wrapper preloaded ##########
 
-[openlog] pid 419 preloaded, logging to /home/user/tabindasandhu/assignment/partB/demo_workspace/open_trace.log
+[openlog] pid 716 preloaded, logging to /home/user/tabindasandhu/assignment/partB/demo_workspace/open_trace.log
 line one
 line two
 line three
 
 ########## unmodified /bin/head and /usr/bin/wc ##########
 
-[openlog] pid 420 preloaded, logging to /home/user/tabindasandhu/assignment/partB/demo_workspace/open_trace.log
+[openlog] pid 717 preloaded, logging to /home/user/tabindasandhu/assignment/partB/demo_workspace/open_trace.log
 line one
 line two
-[openlog] pid 421 preloaded, logging to /home/user/tabindasandhu/assignment/partB/demo_workspace/open_trace.log
+[openlog] pid 718 preloaded, logging to /home/user/tabindasandhu/assignment/partB/demo_workspace/open_trace.log
 3 sample.txt
 
 ########## a program that opens MANY files: grep -r ##########
@@ -20,7 +20,7 @@ line two
 
 ########## a failing open is logged too ##########
 
-[openlog] pid 424 preloaded, logging to /home/user/tabindasandhu/assignment/partB/demo_workspace/open_trace.log
+[openlog] pid 721 preloaded, logging to /home/user/tabindasandhu/assignment/partB/demo_workspace/open_trace.log
 cat: /definitely/not/here: No such file or directory
 
 ########## WHAT LD_PRELOAD CANNOT SEE: our own mycat from Question 6 ##########
@@ -36,20 +36,20 @@ line three
 
 ########## THE RESULTING LOG ##########
 
-2026-09-15 16:25:57.671 pid=419    open    "sample.txt" flags=0x0 (O_RDONLY) -> fd 3
-2026-09-15 16:25:57.673 pid=420    open    "sample.txt" flags=0x0 (O_RDONLY) -> fd 3
-2026-09-15 16:25:57.675 pid=421    open    "sample.txt" flags=0x0 (O_RDONLY) -> fd 3
-2026-09-15 16:25:57.677 pid=422    open    "/proc/self/maps" flags=0x0 (O_RDONLY) -> fd 3
-2026-09-15 16:25:57.677 pid=422    openat  "." flags=0x100 (O_RDONLY|O_NOCTTY) -> fd 3
-2026-09-15 16:25:57.677 pid=422    openat  "." flags=0x90900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_DIRECTORY|O_CLOEXEC) -> fd 3
-2026-09-15 16:25:57.677 pid=422    openat  "emptydir" flags=0xb0900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC) -> fd 3
-2026-09-15 16:25:57.677 pid=422    openat  "noperm.txt" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
-2026-09-15 16:25:57.677 pid=422    openat  "open_trace.log" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
-2026-09-15 16:25:57.677 pid=422    openat  "sample.txt" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
-2026-09-15 16:25:57.677 pid=422    openat  "empty.txt" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
-2026-09-15 16:25:57.677 pid=422    openat  "script_copy.sh" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
-2026-09-15 16:25:57.677 pid=422    openat  "script.sh" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
-2026-09-15 16:25:57.679 pid=424    open    "/definitely/not/here" flags=0x0 (O_RDONLY) -> FAILED (No such file or directory)
+2026-09-15 16:55:34.645 pid=716    open    "sample.txt" flags=0x0 (O_RDONLY) -> fd 3
+2026-09-15 16:55:34.647 pid=717    open    "sample.txt" flags=0x0 (O_RDONLY) -> fd 3
+2026-09-15 16:55:34.649 pid=718    open    "sample.txt" flags=0x0 (O_RDONLY) -> fd 3
+2026-09-15 16:55:34.651 pid=719    open    "/proc/self/maps" flags=0x0 (O_RDONLY) -> fd 3
+2026-09-15 16:55:34.651 pid=719    openat  "." flags=0x100 (O_RDONLY|O_NOCTTY) -> fd 3
+2026-09-15 16:55:34.651 pid=719    openat  "." flags=0x90900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_DIRECTORY|O_CLOEXEC) -> fd 3
+2026-09-15 16:55:34.652 pid=719    openat  "emptydir" flags=0xb0900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC) -> fd 3
+2026-09-15 16:55:34.652 pid=719    openat  "noperm.txt" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
+2026-09-15 16:55:34.652 pid=719    openat  "open_trace.log" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
+2026-09-15 16:55:34.652 pid=719    openat  "sample.txt" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
+2026-09-15 16:55:34.652 pid=719    openat  "empty.txt" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
+2026-09-15 16:55:34.652 pid=719    openat  "script_copy.sh" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
+2026-09-15 16:55:34.652 pid=719    openat  "script.sh" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
+2026-09-15 16:55:34.653 pid=721    open    "/definitely/not/here" flags=0x0 (O_RDONLY) -> FAILED (No such file or directory)
 
 ########## how many opens were captured ##########
 

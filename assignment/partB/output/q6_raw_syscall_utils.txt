@@ -3,12 +3,12 @@
 
 [syscall] openat(AT_FDCWD, "sample.txt", O_RDONLY)         = 3
 [syscall] fstat(3, {mode=0100644, size=29})                = 0
-[syscall] read(3, 0x7ffdbc44fd80, 65536)                   = 29
+[syscall] read(3, 0x7ffe753ce510, 65536)                   = 29
 line one
 line two
 line three
-[syscall] write(1, 0x7ffdbc44fd80, 29)                     = 29
-[syscall] read(3, 0x7ffdbc44fd80, 65536)                   = 0
+[syscall] write(1, 0x7ffe753ce510, 29)                     = 29
+[syscall] read(3, 0x7ffe753ce510, 65536)                   = 0
 [syscall] close(3)                                         = 0
 [syscall] ---- 6 system calls issued ----
 
@@ -19,21 +19,21 @@ cat exit status: 0
 --- mycat ---
 [syscall] openat(AT_FDCWD, "empty.txt", O_RDONLY)          = 3
 [syscall] fstat(3, {mode=0100644, size=0})                 = 0
-[syscall] read(3, 0x7ffcda3dab20, 65536)                   = 0
+[syscall] read(3, 0x7ffdb566ffb0, 65536)                   = 0
 [syscall] close(3)                                         = 0
 [syscall] ---- 4 system calls issued ----
 mycat exit status: 0
 
 ########## EDGE CASE 2: a file with NO READ PERMISSION ##########
 
----------- 1 root root 16 Sep 15 16:25 noperm.txt
+---------- 1 root root 16 Sep 15 16:55 noperm.txt
 --- real cat ---
 cat: noperm.txt: Permission denied
 cat exit status: 1
 --- mycat ---
 [syscall] openat(AT_FDCWD, "noperm.txt", O_RDONLY)         = -1 EACCES (Permission denied)
 mycat: noperm.txt: Permission denied
-[syscall] write(2, 0x7ffd4e2e0fe0, 37)                     = 37
+[syscall] write(2, 0x7ffe0d17e5f0, 37)                     = 37
 [syscall] ---- 2 system calls issued ----
 mycat exit status: 1
 
@@ -46,21 +46,21 @@ ls exit status: 0
 ..
 --- myls ---
 [syscall] openat(AT_FDCWD, "emptydir", O_RDONLY|O_DIRECTORY) = 3
-[syscall] getdents64(3, 0x7ffc26635b80, 65536)             = 48
-[syscall] getdents64(3, 0x7ffc26635b80, 65536)             = 0
+[syscall] getdents64(3, 0x7ffdfc588be0, 65536)             = 48
+[syscall] getdents64(3, 0x7ffdfc588be0, 65536)             = 0
 [syscall] close(3)                                         = 0
 [myls] directory contains no visible entries
-[syscall] write(2, 0x55e0d2b111e0, 45)                     = 45
+[syscall] write(2, 0x55829a93f1e0, 45)                     = 45
 [syscall] ---- 5 system calls issued ----
 myls exit status: 0
 --- myls -a (the kernel's raw view) ---
 [syscall] openat(AT_FDCWD, "emptydir", O_RDONLY|O_DIRECTORY) = 3
-[syscall] getdents64(3, 0x7ffcef78ed60, 65536)             = 48
+[syscall] getdents64(3, 0x7ffe255bf7c0, 65536)             = 48
 d .
-[syscall] write(1, 0x7ffcef78ec20, 4)                      = 4
+[syscall] write(1, 0x7ffe255bf680, 4)                      = 4
 d ..
-[syscall] write(1, 0x7ffcef78ec20, 5)                      = 5
-[syscall] getdents64(3, 0x7ffcef78ed60, 65536)             = 0
+[syscall] write(1, 0x7ffe255bf680, 5)                      = 5
+[syscall] getdents64(3, 0x7ffe255bf7c0, 65536)             = 0
 [syscall] close(3)                                         = 0
 [syscall] ---- 6 system calls issued ----
 
@@ -73,7 +73,7 @@ cat exit status: 1
 [syscall] openat(AT_FDCWD, "emptydir", O_RDONLY)           = 3
 [syscall] fstat(3, {mode=040755, size=4096})               = 0
 mycat: emptydir: Is a directory
-[syscall] write(2, 0x7fffadbd79f0, 32)                     = 32
+[syscall] write(2, 0x7ffc6246f5a0, 32)                     = 32
 [syscall] close(3)                                         = 0
 [syscall] ---- 4 system calls issued ----
 mycat exit status: 1
@@ -83,15 +83,15 @@ mycat exit status: 1
 [syscall] openat(AT_FDCWD, "script.sh", O_RDONLY)          = 3
 [syscall] fstat(3, {mode=0100755, size=18})                = 0
 [syscall] openat(AT_FDCWD, "script_copy.sh", O_WRONLY|O_CREAT|O_TRUNC, 0755) = 4
-[syscall] read(3, 0x7ffee3439830, 65536)                   = 18
-[syscall] write(4, 0x7ffee3439830, 18)                     = 18
-[syscall] read(3, 0x7ffee3439830, 65536)                   = 0
+[syscall] read(3, 0x7ffd507f35b0, 65536)                   = 18
+[syscall] write(4, 0x7ffd507f35b0, 18)                     = 18
+[syscall] read(3, 0x7ffd507f35b0, 65536)                   = 0
 [syscall] close(3)                                         = 0
 [syscall] close(4)                                         = 0
 [syscall] ---- 8 system calls issued ----
 --- permissions after copy (mode must be preserved) ---
--rwxr-xr-x 1 root root 18 Sep 15 16:25 script.sh
--rwxr-xr-x 1 root root 18 Sep 15 16:25 script_copy.sh
+-rwxr-xr-x 1 root root 18 Sep 15 16:55 script.sh
+-rwxr-xr-x 1 root root 18 Sep 15 16:55 script_copy.sh
 
 ########## mycp - destination that cannot be created ##########
 
@@ -99,7 +99,7 @@ mycat exit status: 1
 [syscall] fstat(3, {mode=0100644, size=29})                = 0
 [syscall] openat(AT_FDCWD, "/proc/definitely_not_writable", O_WRONLY|O_CREAT|O_TRUNC, 0644) = -1 ENOENT (No such file or directory)
 mycp: /proc/definitely_not_writable: No such file or directory
-[syscall] write(2, 0x7fff8c21e470, 63)                     = 63
+[syscall] write(2, 0x7ffc75a37920, 63)                     = 63
 [syscall] close(3)                                         = 0
 mycp exit status: 1
 
