@@ -216,14 +216,34 @@ its `+x` bit. The trace makes the mechanism explicit:
 | `ls` hides `.`/`..`, kernel returns them | A user-space convention |
 | `openat` on a directory succeeds | Failure is deferred to `read` → `EISDIR` |
 | Permission errors identical | The kernel decides, not the program |
-| `cat` uses `mmap`/128 KiB buffers | An optimisation; behaviour is unchanged |
-| Real `cat` issues ~44 syscalls, `mycat` 6 | Most of `cat`'s are dynamic-linker startup |
+| `cat` uses a large buffer, sometimes `mmap` | An optimisation; behaviour is unchanged |
+| Real `cat` issues tens of syscalls, `mycat` 6 | Most of `cat`'s are dynamic-linker startup |
 
-That last row is worth dwelling on: of the 44 system calls `/bin/cat` makes to
-print a 29-byte file, **only about six do the actual work**. The rest are the
-dynamic loader mapping libc. `mycat` looks lean only because the comparison is
-unfair — it is dynamically linked too, but its startup happens before its own
-tracing begins. Question 7 measures the honest figure from outside.
+That last row is worth dwelling on. Printing a 29-byte file takes `mycat` six
+system calls; the real `cat` takes several dozen, and **only about six of them
+do the actual work**. The rest are the dynamic loader mapping libc before
+`main()` ever runs. `mycat` looks lean only because the comparison is unfair —
+it is dynamically linked too, but its own tracing does not begin until its
+startup is over. Question 7 measures the honest figure from outside.
+
+### Which `cat` is on the machine matters
+
+Ubuntu 25.10 and later ship the **Rust `uutils` reimplementation** of coreutils
+as the default, not GNU coreutils. Both were used while developing this
+assignment, and they are not syscall-for-syscall identical:
+
+| | GNU `cat` | uutils `cat` |
+|---|---|---|
+| Opens the file with | `openat` | `open64` |
+| Before doing any work | — | loads Fluent locale files from `/usr/share/coreutils/locales/` |
+| Syscalls for a 29-byte file | ~44 | differs |
+
+Neither is more correct; they are two implementations of the same specification,
+which is the point. The kernel-level behaviour `mycat` was written against —
+`openat` succeeding on a directory, `read` returning 0 at end of file, `-EACCES`
+from the kernel rather than from the program — is identical for both, because
+that behaviour belongs to the kernel and not to whoever wrote the utility.
+Run `cat --version` to see which one this machine has.
 
 ---
 
@@ -317,6 +337,12 @@ file.
 An exact match, which is the strongest evidence available that the tracer is
 neither missing stops nor double-counting them.
 
+The absolute figure is machine-specific — it depends on the libc version and on
+whether `cat` is GNU or uutils — so it is not a number to memorise. What matters
+is that **the two tools agree with each other on the same binary**: had the
+tracer skipped stops the total would come out low, and had it counted entry and
+exit as two separate calls it would come out at roughly double.
+
 ---
 
 # Question 8 — Wrapping library calls with `LD_PRELOAD`
@@ -351,8 +377,11 @@ No recompilation, no source access, no cooperation from `cat` whatsoever.
    `__thread` guard flag stops that becoming a nested log record.
 
 `open()` alone catches very little on a current system: glibc implements
-`open()` in terms of `openat()`, and coreutils call `openat()` directly. The
-shim therefore overrides `open`, `open64`, `openat` and `fopen`. Variadic
+`open()` in terms of `openat()`, GNU coreutils call `openat()` directly, and
+the Rust uutils build that Ubuntu 25.10 ships calls `open64()`. A shim
+overriding only `open` would therefore log almost nothing on one system and
+nothing at all on another. This one overrides `open`, `open64`, `openat` and
+`fopen`. Variadic
 handling matters too — the `mode` argument only exists when `O_CREAT` or
 `O_TMPFILE` is set, so `va_arg` is only read in that case.
 
