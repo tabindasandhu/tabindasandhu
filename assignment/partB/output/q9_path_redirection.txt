@@ -1,0 +1,67 @@
+
+########## BEFORE: cat secret.txt with no interception ##########
+
+THIS IS THE REAL SECRET FILE
+
+########## AFTER: same command, same arguments, through the redirector ##########
+
+redirect: rule 1: "secret.txt" -> "decoy.txt"
+[redirect] "secret.txt" -> "decoy.txt"
+this is the harmless decoy file
++++ exited with 0 +++
+redirect: 1 path(s) translated
+
+########## the replacement path may be LONGER than the original ##########
+
+redirect: rule 1: "secret.txt" -> "replacement_with_a_very_long_filename.txt"
+[redirect] "secret.txt" -> "replacement_with_a_very_long_filename.txt"
+a replacement whose path is deliberately much longer
++++ exited with 0 +++
+redirect: 1 path(s) translated
+
+########## PREFIX rule: redirect a whole subtree ##########
+
+--- without redirection ---
+real directory content
+--- with realdir/ -> fakedir/ ---
+redirect: rule 1: "realdir/" -> "fakedir/" (prefix)
+[redirect] "realdir/data.txt" -> "fakedir/data.txt"
+FAKE directory content
++++ exited with 0 +++
+redirect: 1 path(s) translated
+
+########## redirecting a system file the program trusts ##########
+
+redirect: rule 1: "/etc/hostname" -> "my_hostname"
+[redirect] "/etc/hostname" -> "my_hostname"
+this machine is called something-else
++++ exited with 0 +++
+redirect: 1 path(s) translated
+
+########## it works on a program we did not write and cannot recompile: head ##########
+
+redirect: rule 1: "secret.txt" -> "decoy.txt"
+[redirect] "secret.txt" -> "decoy.txt"
+this is the harmless decoy file
++++ exited with 0 +++
+redirect: 1 path(s) translated
+
+########## VERBOSE: the full trace with the rewrite visible in context ##########
+
+redirect: rule 1: "secret.txt" -> "decoy.txt"
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+openat(AT_FDCWD, "secret.txt", O_RDONLY)
+[redirect] "secret.txt" -> "decoy.txt"
+exit_group(0)+++ exited with 0 +++
+redirect: 1 path(s) translated
+
+########## PROOF the tracee cannot tell: it still reports the ORIGINAL name ##########
+
+cat was asked for secret.txt and printed decoy.txt's contents,
+and any error message it produces still names secret.txt:
+redirect: rule 1: "secret.txt" -> "/does/not/exist"
+[redirect] "secret.txt" -> "/does/not/exist"
+/bin/cat: secret.txt: No such file or directory
++++ exited with 1 +++
+redirect: 1 path(s) translated

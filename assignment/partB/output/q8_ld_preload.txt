@@ -1,0 +1,56 @@
+
+########## unmodified /bin/cat, with the wrapper preloaded ##########
+
+[openlog] pid 1352 preloaded, logging to /home/user/tabindasandhu/assignment/partB/demo_workspace/open_trace.log
+line one
+line two
+line three
+
+########## unmodified /bin/head and /usr/bin/wc ##########
+
+[openlog] pid 1353 preloaded, logging to /home/user/tabindasandhu/assignment/partB/demo_workspace/open_trace.log
+line one
+line two
+[openlog] pid 1354 preloaded, logging to /home/user/tabindasandhu/assignment/partB/demo_workspace/open_trace.log
+3 sample.txt
+
+########## a program that opens MANY files: grep -r ##########
+
+./sample.txt:line two
+
+########## a failing open is logged too ##########
+
+[openlog] pid 1357 preloaded, logging to /home/user/tabindasandhu/assignment/partB/demo_workspace/open_trace.log
+cat: /definitely/not/here: No such file or directory
+
+########## WHAT LD_PRELOAD CANNOT SEE: our own mycat from Question 6 ##########
+
+mycat calls syscall() directly and never goes through libc's open(),
+so symbol interposition has nothing to intercept. Compare this with
+Question 7, whose ptrace tracer sees every one of its calls.
+line one
+line two
+line three
+--- log after running mycat with the shim preloaded ---
+(empty - the shim saw nothing at all)
+
+########## THE RESULTING LOG ##########
+
+2026-09-15 15:29:40.797 pid=1352   open    "sample.txt" flags=0x0 (O_RDONLY) -> fd 3
+2026-09-15 15:29:40.799 pid=1353   open    "sample.txt" flags=0x0 (O_RDONLY) -> fd 3
+2026-09-15 15:29:40.800 pid=1354   open    "sample.txt" flags=0x0 (O_RDONLY) -> fd 3
+2026-09-15 15:29:40.802 pid=1355   open    "/proc/self/maps" flags=0x0 (O_RDONLY) -> fd 3
+2026-09-15 15:29:40.802 pid=1355   openat  "." flags=0x100 (O_RDONLY|O_NOCTTY) -> fd 3
+2026-09-15 15:29:40.802 pid=1355   openat  "." flags=0x90900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_DIRECTORY|O_CLOEXEC) -> fd 3
+2026-09-15 15:29:40.802 pid=1355   openat  "emptydir" flags=0xb0900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_DIRECTORY|O_NOFOLLOW|O_CLOEXEC) -> fd 3
+2026-09-15 15:29:40.802 pid=1355   openat  "noperm.txt" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
+2026-09-15 15:29:40.802 pid=1355   openat  "open_trace.log" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
+2026-09-15 15:29:40.802 pid=1355   openat  "sample.txt" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
+2026-09-15 15:29:40.802 pid=1355   openat  "empty.txt" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
+2026-09-15 15:29:40.802 pid=1355   openat  "script_copy.sh" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
+2026-09-15 15:29:40.802 pid=1355   openat  "script.sh" flags=0x20900 (O_RDONLY|O_NOCTTY|O_NONBLOCK|O_NOFOLLOW) -> fd 3
+2026-09-15 15:29:40.804 pid=1357   open    "/definitely/not/here" flags=0x0 (O_RDONLY) -> FAILED (No such file or directory)
+
+########## how many opens were captured ##########
+
+total logged opens: 14

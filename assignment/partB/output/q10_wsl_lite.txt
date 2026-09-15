@@ -1,0 +1,165 @@
+
+########## the command table ##########
+
+[2m--- help: issuing system calls ---[0m
+
+[1mwsl_lite - commands and the system calls they issue[0m
+
+  COMMAND                SYSCALL SEQUENCE                           MEANING
+  ---------------------- ------------------------------------------ -------
+  wsl-read               openat, fstat, read*, write*, close        print a file's contents
+  wsl-list               openat(O_DIRECTORY), getdents64*, close    list a directory
+  wsl-copy               openat x2, fstat, read*, write*, close x2  copy SRC to DST
+  wsl-stat               openat, fstat, close                       show a file's metadata
+  wsl-write              openat(O_CREAT|O_TRUNC), write*, close     write TEXT into FILE
+  help                   -                                          show this table
+
+  exit | quit            leave the dispatcher
+
+  (* = issued repeatedly until the operation completes)
+
+[2m--- help: 0 system calls, exit 0 ---[0m
+
+########## a full session ##########
+
+[2m--- wsl-read: issuing system calls ---[0m
+[syscall] openat(AT_FDCWD, "sample.txt", O_RDONLY)         = 3
+[syscall] fstat(3, {mode=0100644, size=29})                = 0
+[syscall] read(3, 0x7ffe087ee030, 65536)                   = 29
+line one
+line two
+line three
+[syscall] write(1, 0x7ffe087ee030, 29)                     = 29
+[syscall] read(3, 0x7ffe087ee030, 65536)                   = 0
+[syscall] close(3)                                         = 0
+[2m--- wsl-read: 6 system calls, exit 0 ---[0m
+[2m--- wsl-stat: issuing system calls ---[0m
+[syscall] openat(AT_FDCWD, "sample.txt", O_RDONLY)         = 3
+[syscall] fstat(3, {mode=0100644, size=29})                = 0
+  path   : sample.txt
+  type   : regular file
+  size   : 29 bytes
+  mode   : 0644
+  inode  : 475680
+  links  : 1
+[syscall] close(3)                                         = 0
+[2m--- wsl-stat: 3 system calls, exit 0 ---[0m
+[2m--- wsl-copy: issuing system calls ---[0m
+[syscall] openat(AT_FDCWD, "sample.txt", O_RDONLY)         = 3
+[syscall] fstat(3, {mode=0100644, size=29})                = 0
+[syscall] openat(AT_FDCWD, "copied.txt", O_WRONLY|O_CREAT|O_TRUNC, 0644) = 4
+[syscall] read(3, 0x7ffe087ee020, 65536)                   = 29
+[syscall] write(4, 0x7ffe087ee020, 29)                     = 29
+[syscall] read(3, 0x7ffe087ee020, 65536)                   = 0
+[syscall] close(3)                                         = 0
+[syscall] close(4)                                         = 0
+[2m--- wsl-copy: 8 system calls, exit 0 ---[0m
+[2m--- wsl-read: issuing system calls ---[0m
+[syscall] openat(AT_FDCWD, "copied.txt", O_RDONLY)         = 3
+[syscall] fstat(3, {mode=0100644, size=29})                = 0
+[syscall] read(3, 0x7ffe087ee030, 65536)                   = 29
+line one
+line two
+line three
+[syscall] write(1, 0x7ffe087ee030, 29)                     = 29
+[syscall] read(3, 0x7ffe087ee030, 65536)                   = 0
+[syscall] close(3)                                         = 0
+[2m--- wsl-read: 6 system calls, exit 0 ---[0m
+[2m--- wsl-write: issuing system calls ---[0m
+[syscall] openat(AT_FDCWD, "generated.txt", O_WRONLY|O_CREAT|O_TRUNC, 0644) = 3
+[syscall] write(3, 0x7ffe087fe118, 5)                      = 5
+[syscall] write(3, 0x55b4413371ae, 1)                      = 1
+[syscall] write(3, 0x7ffe087fe11e, 4)                      = 4
+[syscall] write(3, 0x55b4413371ae, 1)                      = 1
+[syscall] write(3, 0x7ffe087fe123, 8)                      = 8
+[syscall] write(3, 0x55b4413372e3, 1)                      = 1
+[syscall] close(3)                                         = 0
+[2m--- wsl-write: 8 system calls, exit 0 ---[0m
+[2m--- wsl-read: issuing system calls ---[0m
+[syscall] openat(AT_FDCWD, "generated.txt", O_RDONLY)      = 3
+[syscall] fstat(3, {mode=0100644, size=20})                = 0
+[syscall] read(3, 0x7ffe087ee030, 65536)                   = 20
+hello from wsl_lite
+[syscall] write(1, 0x7ffe087ee030, 20)                     = 20
+[syscall] read(3, 0x7ffe087ee030, 65536)                   = 0
+[syscall] close(3)                                         = 0
+[2m--- wsl-read: 6 system calls, exit 0 ---[0m
+[2m--- wsl-list: issuing system calls ---[0m
+[syscall] openat(AT_FDCWD, ".", O_RDONLY|O_DIRECTORY)      = 3
+[syscall] getdents64(3, 0x7ffe087ee010, 65536)             = 584
+d emptydir
+[syscall] write(1, 0x7ffe087edef0, 11)                     = 11
+- noperm.txt
+[syscall] write(1, 0x7ffe087edef0, 13)                     = 13
+- open_trace.log
+[syscall] write(1, 0x7ffe087edef0, 17)                     = 17
+- sample.txt
+[syscall] write(1, 0x7ffe087edef0, 13)                     = 13
+d fakedir
+[syscall] write(1, 0x7ffe087edef0, 10)                     = 10
+- copied.txt
+[syscall] write(1, 0x7ffe087edef0, 13)                     = 13
+- decoy.txt
+[syscall] write(1, 0x7ffe087edef0, 12)                     = 12
+- my_hostname
+[syscall] write(1, 0x7ffe087edef0, 14)                     = 14
+- generated.txt
+[syscall] write(1, 0x7ffe087edef0, 16)                     = 16
+- empty.txt
+[syscall] write(1, 0x7ffe087edef0, 12)                     = 12
+- script_copy.sh
+[syscall] write(1, 0x7ffe087edef0, 17)                     = 17
+- replacement_with_a_very_long_filename.txt
+[syscall] write(1, 0x7ffe087edef0, 44)                     = 44
+- script.sh
+[syscall] write(1, 0x7ffe087edef0, 12)                     = 12
+d realdir
+[syscall] write(1, 0x7ffe087edef0, 10)                     = 10
+- secret.txt
+[syscall] write(1, 0x7ffe087edef0, 13)                     = 13
+[syscall] getdents64(3, 0x7ffe087ee010, 65536)             = 0
+[syscall] close(3)                                         = 0
+[2m--- wsl-list: 19 system calls, exit 0 ---[0m
+[2m--- wsl-read: issuing system calls ---[0m
+[syscall] openat(AT_FDCWD, "/nonexistent", O_RDONLY)       = -1 ENOENT (No such file or directory)
+wsl_lite: wsl-read: /nonexistent: No such file or directory
+[2m--- wsl-read: 1 system calls, exit 1 ---[0m
+wsl_lite: unknown command 'bogus-command' (try 'help')
+
+########## one-shot mode ##########
+
+[2m--- wsl-read: issuing system calls ---[0m
+[syscall] openat(AT_FDCWD, "sample.txt", O_RDONLY)         = 3
+[syscall] fstat(3, {mode=0100644, size=29})                = 0
+[syscall] read(3, 0x7fff384e5bb0, 65536)                   = 29
+line one
+line two
+line three
+[syscall] write(1, 0x7fff384e5bb0, 29)                     = 29
+[syscall] read(3, 0x7fff384e5bb0, 65536)                   = 0
+[syscall] close(3)                                         = 0
+[2m--- wsl-read: 6 system calls, exit 0 ---[0m
+
+########## wsl_lite seen from the OUTSIDE by our own Question 7 tracer ##########
+
+(its raw syscalls appear in mini_strace's trace, proving wsl_lite
+ really does go straight to the kernel rather than shelling out)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+close(3) = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, 0x7ffdebb83e48, 832) = 832
+close(3) = 0
+openat(AT_FDCWD, "sample.txt", O_RDONLY) = 3
+read(3, 0x7ffdebb73a00, 65536) = 29
+write(1, 0x7ffdebb73a00, 29)line one
+read(3, 0x7ffdebb73a00, 65536) = 0
+close(3) = 0
+exit_group(0)+++ exited with 0 +++
+
+########## proof it never shells out: no execve appears in the trace ##########
+
+wsl_lite's own startup execve happens before the tracer attaches,
+so ANY execve in the trace below would mean it launched a helper
+program such as /bin/cat. The count is:
+0
+(0 = the command was carried out entirely by wsl_lite's own syscalls)

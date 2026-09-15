@@ -1,0 +1,14 @@
+# Build products - regenerate with `make`
+*.o
+*.so
+mycat
+mycp
+myls
+mini_strace
+redirect
+wsl_lite
+syscall_names.h
+
+# Scratch area created by run_demos.sh (output/ IS committed - it is the
+# captured evidence the assignment asks to submit)
+demo_workspace/

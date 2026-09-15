@@ -1,0 +1,294 @@
+
+########## TARGET 1: /bin/ls on a small directory ##########
+
+mini_strace: tracing pid 1339 (/bin/ls)
+brk(0x0, 0x7f1bed87ea18, 0x0) = 0x5607c4375000
+mmap(0x0, 8192, 0x3, 0x22, -1, 0) = 0x7f1bed83e000
+access("/etc/ld.so.preload", ...) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, 0x7ffdaf4ccd70) = 0
+mmap(0x0, 34091, 0x1, 0x2, 3, 0) = 0x7f1bed835000
+close(3) = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, 0x7ffdaf4ccfa8, 832) = 832
+fstat(3, 0x7ffdaf4cce40) = 0
+mmap(0x0, 181960, 0x1, 0x802, 3, 0) = 0x7f1bed808000
+mmap(0x7f1bed80e000, 118784, 0x5, 0x812, 3, 24576) = 0x7f1bed80e000
+mmap(0x7f1bed82b000, 24576, 0x1, 0x812, 3, 143360) = 0x7f1bed82b000
+mmap(0x7f1bed831000, 8192, 0x3, 0x812, 3, 167936) = 0x7f1bed831000
+mmap(0x7f1bed833000, 5832, 0x3, 0x32, -1, 0) = 0x7f1bed833000
+close(3) = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, 0x7ffdaf4ccf88, 832) = 832
+pread64(0x3, 0x7ffdaf4ccba0, 0x310) = 784
+fstat(3, 0x7ffdaf4cce20) = 0
+pread64(0x3, 0x7ffdaf4cca70, 0x310) = 784
+mmap(0x0, 2170256, 0x1, 0x802, 3, 0) = 0x7f1bed400000
+mmap(0x7f1bed428000, 1605632, 0x5, 0x812, 3, 163840) = 0x7f1bed428000
+mmap(0x7f1bed5b0000, 323584, 0x1, 0x812, 3, 1769472) = 0x7f1bed5b0000
+mmap(0x7f1bed5ff000, 24576, 0x3, 0x812, 3, 2088960) = 0x7f1bed5ff000
+mmap(0x7f1bed605000, 52624, 0x3, 0x32, -1, 0) = 0x7f1bed605000
+close(3) = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, 0x7ffdaf4ccf68, 832) = 832
+fstat(3, 0x7ffdaf4cce00) = 0
+mmap(0x0, 627472, 0x1, 0x802, 3, 0) = 0x7f1bed76e000
+mmap(0x7f1bed770000, 450560, 0x5, 0x812, 3, 8192) = 0x7f1bed770000
+mmap(0x7f1bed7de000, 163840, 0x1, 0x812, 3, 458752) = 0x7f1bed7de000
+mmap(0x7f1bed806000, 8192, 0x3, 0x812, 3, 618496) = 0x7f1bed806000
+close(3) = 0
+mmap(0x0, 12288, 0x3, 0x22, -1, 0) = 0x7f1bed76b000
+arch_prctl(0x1002, 0x7f1bed76b800, 0xffff80e412893e70) = 0
+set_tid_address(0x7f1bed76bad0, 0x7f1bed76b800, 0x7f1bed8810c8) = 1339
+set_robust_list(0x7f1bed76bae0, 0x18, 0x7f1bed8810c8) = 0
+rseq(0x7f1bed76c120, 0x20, 0x0) = 0
+mprotect(0x7f1bed5ff000, 0x4000, 0x1) = 0
+mprotect(0x7f1bed806000, 0x1000, 0x1) = 0
+mprotect(0x7f1bed831000, 0x1000, 0x1) = 0
+mprotect(0x56079e8d5000, 0x2000, 0x1) = 0
+mprotect(0x7f1bed87e000, 0x2000, 0x1) = 0
+prlimit64(0x0, 0x3, 0x0) = 0
+munmap(0x7f1bed835000, 0x852b, 0x0) = 0
+statfs(0x7f1bed82b1f7, 0x7ffdaf4cdbf0, 0x0) = 0
+statfs(0x7f1bed82b1fe, 0x7ffdaf4cdbf0, 0x0) = -1 ENOENT (No such file or directory)
+getrandom(0x7f1bed60a178, 0x8, 0x1) = 8
+brk(0x0, 0x7f1bed603b20, 0x7f1bed603b20) = 0x5607c4375000
+brk(0x5607c4396000, 0x7f1bed603b20, 0x7f1bed60ad70) = 0x5607c4396000
+openat(AT_FDCWD, "/proc/filesystems", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, 0x7ffdaf4cda90) = 0
+read(3, 0x5607c4375500, 1024) = 368
+close(3) = 0
+openat(AT_FDCWD, "/proc/mounts", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, 0x7ffdaf4cdaf0) = 0
+read(3, 0x5607c4375500, 1024) = 1024
+read(3, 0x5607c4375500, 1024) = 628
+read(3, 0x5607c4375500, 1024) = 0
+close(3) = 0
+access("/etc/selinux/config", ...) = -1 ENOENT (No such file or directory)
+ioctl(0x1, 0x5401, 0x7ffdaf4cda90) = -1 ENOTTY (Inappropriate ioctl for device)
+statx(0xffffff9c, 0x7ffdaf4d0248, 0x800) = 0
+openat(AT_FDCWD, "emptydir", O_RDONLY|O_NONBLOCK|O_DIRECTORY|O_CLOEXEC) = 3
+fstat(3, 0x7ffdaf4cd760) = 0
+getdents64(3, 0x5607c437ac80) = 48
+getdents64(3, 0x5607c437ac80) = 0
+close(3) = 0
+close(1) = 0
+close(2) = 0
+exit_group(0)+++ exited with 0 +++
+
+########## TARGET 2: /bin/cat sample.txt ##########
+
+mini_strace: tracing pid 1341 (/bin/cat)
+brk(0x0, 0x7f8d4c727a18, 0x0) = 0x55f1dddb1000
+mmap(0x0, 8192, 0x3, 0x22, -1, 0) = 0x7f8d4c6e7000
+access("/etc/ld.so.preload", ...) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, 0x7ffe317d97f0) = 0
+mmap(0x0, 34091, 0x1, 0x2, 3, 0) = 0x7f8d4c6de000
+close(3) = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, 0x7ffe317d9a28, 832) = 832
+pread64(0x3, 0x7ffe317d9640, 0x310) = 784
+fstat(3, 0x7ffe317d98c0) = 0
+pread64(0x3, 0x7ffe317d9510, 0x310) = 784
+mmap(0x0, 2170256, 0x1, 0x802, 3, 0) = 0x7f8d4c400000
+mmap(0x7f8d4c428000, 1605632, 0x5, 0x812, 3, 163840) = 0x7f8d4c428000
+mmap(0x7f8d4c5b0000, 323584, 0x1, 0x812, 3, 1769472) = 0x7f8d4c5b0000
+mmap(0x7f8d4c5ff000, 24576, 0x3, 0x812, 3, 2088960) = 0x7f8d4c5ff000
+mmap(0x7f8d4c605000, 52624, 0x3, 0x32, -1, 0) = 0x7f8d4c605000
+close(3) = 0
+mmap(0x0, 12288, 0x3, 0x22, -1, 0) = 0x7f8d4c6db000
+arch_prctl(0x1002, 0x7f8d4c6db740, 0xffff8072b3923f30) = 0
+set_tid_address(0x7f8d4c6dba10, 0x7f8d4c6db740, 0x7f8d4c72a0c8) = 1341
+set_robust_list(0x7f8d4c6dba20, 0x18, 0x7f8d4c72a0c8) = 0
+rseq(0x7f8d4c6dc060, 0x20, 0x0) = 0
+mprotect(0x7f8d4c5ff000, 0x4000, 0x1) = 0
+mprotect(0x55f1c5838000, 0x1000, 0x1) = 0
+mprotect(0x7f8d4c727000, 0x2000, 0x1) = 0
+prlimit64(0x0, 0x3, 0x0) = 0
+munmap(0x7f8d4c6de000, 0x852b, 0x0) = 0
+getrandom(0x7f8d4c60a178, 0x8, 0x1) = 8
+brk(0x0, 0x7f8d4c603b20, 0x7f8d4c603b20) = 0x55f1dddb1000
+brk(0x55f1dddd2000, 0x7f8d4c603b20, 0x7f8d4c60ad70) = 0x55f1dddd2000
+fstat(1, 0x7ffe317da4a0) = 0
+openat(AT_FDCWD, "sample.txt", O_RDONLY) = 3
+fstat(3, 0x7ffe317da4a0) = 0
+fadvise64(0x3, 0x0, 0x0) = 0
+uname(0x7ffe317da530, 0x0, 0x0) = 0
+copy_file_range(0x3, 0x0, 0x1)line one
+line two
+line three
+ = 29
+copy_file_range(0x3, 0x0, 0x1) = 0
+close(3) = 0
+close(1) = 0
+close(2) = 0
+exit_group(0)+++ exited with 0 +++
+
+########## TARGET 3: our own mycat - raw syscalls seen from the outside ##########
+
+mini_strace: tracing pid 1343 (/home/user/tabindasandhu/assignment/partB/mycat)
+brk(0x0, 0x7f2df25fba18, 0x0) = 0x559577eef000
+mmap(0x0, 8192, 0x3, 0x22, -1, 0) = 0x7f2df25bb000
+access("/etc/ld.so.preload", ...) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, 0x7ffe18e51c90) = 0
+mmap(0x0, 34091, 0x1, 0x2, 3, 0) = 0x7f2df25b2000
+close(3) = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, 0x7ffe18e51ec8, 832) = 832
+pread64(0x3, 0x7ffe18e51ae0, 0x310) = 784
+fstat(3, 0x7ffe18e51d60) = 0
+pread64(0x3, 0x7ffe18e519b0, 0x310) = 784
+mmap(0x0, 2170256, 0x1, 0x802, 3, 0) = 0x7f2df2200000
+mmap(0x7f2df2228000, 1605632, 0x5, 0x812, 3, 163840) = 0x7f2df2228000
+mmap(0x7f2df23b0000, 323584, 0x1, 0x812, 3, 1769472) = 0x7f2df23b0000
+mmap(0x7f2df23ff000, 24576, 0x3, 0x812, 3, 2088960) = 0x7f2df23ff000
+mmap(0x7f2df2405000, 52624, 0x3, 0x32, -1, 0) = 0x7f2df2405000
+close(3) = 0
+mmap(0x0, 12288, 0x3, 0x22, -1, 0) = 0x7f2df25af000
+arch_prctl(0x1002, 0x7f2df25af740, 0xffff80d20da4ff30) = 0
+set_tid_address(0x7f2df25afa10, 0x7f2df25af740, 0x7f2df25fe0c8) = 1343
+set_robust_list(0x7f2df25afa20, 0x18, 0x7f2df25fe0c8) = 0
+rseq(0x7f2df25b0060, 0x20, 0x0) = 0
+mprotect(0x7f2df23ff000, 0x4000, 0x1) = 0
+mprotect(0x559575494000, 0x1000, 0x1) = 0
+mprotect(0x7f2df25fb000, 0x2000, 0x1) = 0
+prlimit64(0x0, 0x3, 0x0) = 0
+munmap(0x7f2df25b2000, 0x852b, 0x0) = 0
+openat(AT_FDCWD, "sample.txt", O_RDONLY) = 3
+fstat(3, 0x7ffe18e42aa0) = 0
+read(3, 0x7ffe18e42b30, 65536) = 29
+write(1, 0x7ffe18e42b30, 29)line one
+line two
+line three
+ = 29
+read(3, 0x7ffe18e42b30, 65536) = 0
+close(3) = 0
+exit_group(0)+++ exited with 0 +++
+
+########## TARGET 4: syscall count summary for /bin/ls (-c) ##########
+
+mini_strace: tracing pid 1345 (/bin/ls)
+brk(0x0, 0x7f8ac3329a18, 0x0) = 0x56175c4ff000
+mmap(0x0, 8192, 0x3, 0x22, -1, 0) = 0x7f8ac32e9000
+access("/etc/ld.so.preload", ...) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, 0x7ffc2e776440) = 0
+mmap(0x0, 34091, 0x1, 0x2, 3, 0) = 0x7f8ac32e0000
+close(3) = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, 0x7ffc2e776678, 832) = 832
+fstat(3, 0x7ffc2e776510) = 0
+mmap(0x0, 181960, 0x1, 0x802, 3, 0) = 0x7f8ac32b3000
+mmap(0x7f8ac32b9000, 118784, 0x5, 0x812, 3, 24576) = 0x7f8ac32b9000
+mmap(0x7f8ac32d6000, 24576, 0x1, 0x812, 3, 143360) = 0x7f8ac32d6000
+mmap(0x7f8ac32dc000, 8192, 0x3, 0x812, 3, 167936) = 0x7f8ac32dc000
+mmap(0x7f8ac32de000, 5832, 0x3, 0x32, -1, 0) = 0x7f8ac32de000
+close(3) = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, 0x7ffc2e776658, 832) = 832
+pread64(0x3, 0x7ffc2e776270, 0x310) = 784
+fstat(3, 0x7ffc2e7764f0) = 0
+pread64(0x3, 0x7ffc2e776140, 0x310) = 784
+mmap(0x0, 2170256, 0x1, 0x802, 3, 0) = 0x7f8ac3000000
+mmap(0x7f8ac3028000, 1605632, 0x5, 0x812, 3, 163840) = 0x7f8ac3028000
+mmap(0x7f8ac31b0000, 323584, 0x1, 0x812, 3, 1769472) = 0x7f8ac31b0000
+mmap(0x7f8ac31ff000, 24576, 0x3, 0x812, 3, 2088960) = 0x7f8ac31ff000
+mmap(0x7f8ac3205000, 52624, 0x3, 0x32, -1, 0) = 0x7f8ac3205000
+close(3) = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, 0x7ffc2e776638, 832) = 832
+fstat(3, 0x7ffc2e7764d0) = 0
+mmap(0x0, 627472, 0x1, 0x802, 3, 0) = 0x7f8ac3219000
+mmap(0x7f8ac321b000, 450560, 0x5, 0x812, 3, 8192) = 0x7f8ac321b000
+mmap(0x7f8ac3289000, 163840, 0x1, 0x812, 3, 458752) = 0x7f8ac3289000
+mmap(0x7f8ac32b1000, 8192, 0x3, 0x812, 3, 618496) = 0x7f8ac32b1000
+close(3) = 0
+mmap(0x0, 12288, 0x3, 0x22, -1, 0) = 0x7f8ac3216000
+arch_prctl(0x1002, 0x7f8ac3216800, 0xffff80753cde8e70) = 0
+set_tid_address(0x7f8ac3216ad0, 0x7f8ac3216800, 0x7f8ac332c0c8) = 1345
+set_robust_list(0x7f8ac3216ae0, 0x18, 0x7f8ac332c0c8) = 0
+rseq(0x7f8ac3217120, 0x20, 0x0) = 0
+mprotect(0x7f8ac31ff000, 0x4000, 0x1) = 0
+mprotect(0x7f8ac32b1000, 0x1000, 0x1) = 0
+mprotect(0x7f8ac32dc000, 0x1000, 0x1) = 0
+mprotect(0x56173fad5000, 0x2000, 0x1) = 0
+mprotect(0x7f8ac3329000, 0x2000, 0x1) = 0
+prlimit64(0x0, 0x3, 0x0) = 0
+munmap(0x7f8ac32e0000, 0x852b, 0x0) = 0
+statfs(0x7f8ac32d61f7, 0x7ffc2e7772c0, 0x0) = 0
+statfs(0x7f8ac32d61fe, 0x7ffc2e7772c0, 0x0) = -1 ENOENT (No such file or directory)
+getrandom(0x7f8ac320a178, 0x8, 0x1) = 8
+brk(0x0, 0x7f8ac3203b20, 0x7f8ac3203b20) = 0x56175c4ff000
+brk(0x56175c520000, 0x7f8ac3203b20, 0x7f8ac320ad70) = 0x56175c520000
+openat(AT_FDCWD, "/proc/filesystems", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, 0x7ffc2e777160) = 0
+read(3, 0x56175c4ff500, 1024) = 368
+close(3) = 0
+openat(AT_FDCWD, "/proc/mounts", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, 0x7ffc2e7771c0) = 0
+read(3, 0x56175c4ff500, 1024) = 1024
+read(3, 0x56175c4ff500, 1024) = 628
+read(3, 0x56175c4ff500, 1024) = 0
+close(3) = 0
+access("/etc/selinux/config", ...) = -1 ENOENT (No such file or directory)
+ioctl(0x1, 0x5401, 0x7ffc2e777160) = -1 ENOTTY (Inappropriate ioctl for device)
+statx(0xffffff9c, 0x7ffc2e778248, 0x800) = 0
+openat(AT_FDCWD, "emptydir", O_RDONLY|O_NONBLOCK|O_DIRECTORY|O_CLOEXEC) = 3
+fstat(3, 0x7ffc2e776e30) = 0
+getdents64(3, 0x56175c504c80) = 48
+getdents64(3, 0x56175c504c80) = 0
+close(3) = 0
+close(1) = 0
+close(2) = 0
+exit_group(0)+++ exited with 0 +++
+
+syscall                   calls
+-------------------- ----------
+read                          7
+close                         9
+fstat                         7
+mmap                         17
+mprotect                      5
+munmap                        1
+brk                           3
+ioctl                         1
+pread64                       2
+access                        2
+statfs                        2
+arch_prctl                    1
+getdents64                    2
+set_tid_address               1
+exit_group                    1
+openat                        7
+set_robust_list               1
+prlimit64                     1
+getrandom                     1
+statx                         1
+rseq                          1
+-------------------- ----------
+TOTAL                        73
+
+########## CROSS-CHECK: the real strace on the same command ##########
+
+getrandom("\xde\x14\x4c\x50\x5f\xd3\x6a\xcc", 8, GRND_NONBLOCK) = 8
+brk(NULL)                               = 0x56231346f000
+brk(0x562313490000)                     = 0x562313490000
+fstat(1, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+openat(AT_FDCWD, "sample.txt", O_RDONLY) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=29, ...}) = 0
+fadvise64(3, 0, 0, POSIX_FADV_SEQUENTIAL) = 0
+mmap(NULL, 139264, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f14cc53e000
+read(3, "line one\nline two\nline three\n", 131072) = 29
+write(1, "line one\nline two\nline three\n", 29line one
+line two
+line three
+) = 29
+read(3, "", 131072)                     = 0
+munmap(0x7f14cc53e000, 139264)          = 0
+close(3)                                = 0
+close(1)                                = 0
+close(2)                                = 0
+exit_group(0)                           = ?
++++ exited with 0 +++
